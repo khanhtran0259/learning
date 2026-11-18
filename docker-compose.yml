@@ -1,0 +1,76 @@
+name: jhipster-microservices
+
+services:
+  # ---------------------------------------------------------------------------
+  # 1. Netflix Eureka & Spring Cloud Config Registry
+  # ---------------------------------------------------------------------------
+  jhipster-registry:
+    image: jhipster/jhipster-registry:v7.5.0
+    container_name: jhipster-registry
+    volumes:
+      - ./gateway/src/main/docker/central-server-config:/central-config
+    environment:
+      - _JAVA_OPTIONS=-Xmx512m -Xms256m
+      - SPRING_PROFILES_ACTIVE=dev
+      - SPRING_SECURITY_USER_PASSWORD=admin
+      - JHIPSTER_REGISTRY_PASSWORD=admin
+      - SPRING_CLOUD_CONFIG_SERVER_COMPOSITE_0_TYPE=native
+      - SPRING_CLOUD_CONFIG_SERVER_COMPOSITE_0_SEARCH_LOCATIONS=file:./central-config/localhost-config/
+    ports:
+      - "8761:8761"
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8761/management/health"]
+      interval: 5s
+      timeout: 5s
+      retries: 25
+
+  # ---------------------------------------------------------------------------
+  # 2. Redis Caches
+  # ---------------------------------------------------------------------------
+  redis-product:
+    image: redis:7.2-alpine
+    container_name: redis-product
+    ports:
+      - "6379:6379"
+
+  redis-order:
+    image: redis:7.2-alpine
+    container_name: redis-order
+    ports:
+      - "6380:6379"
+
+  # ---------------------------------------------------------------------------
+  # 3. PostgreSQL Databases (Production / Container Profiles)
+  # ---------------------------------------------------------------------------
+  postgres-gateway:
+    image: postgres:17.5
+    container_name: postgres-gateway
+    environment:
+      - POSTGRES_USER=gateway
+      - POSTGRES_PASSWORD=
+      - POSTGRES_HOST_AUTH_METHOD=trust
+      - POSTGRES_DB=gateway
+    ports:
+      - "5432:5432"
+
+  postgres-product:
+    image: postgres:17.5
+    container_name: postgres-product
+    environment:
+      - POSTGRES_USER=productservice
+      - POSTGRES_PASSWORD=
+      - POSTGRES_HOST_AUTH_METHOD=trust
+      - POSTGRES_DB=productservice
+    ports:
+      - "5433:5432"
+
+  postgres-order:
+    image: postgres:17.5
+    container_name: postgres-order
+    environment:
+      - POSTGRES_USER=orderservice
+      - POSTGRES_PASSWORD=
+      - POSTGRES_HOST_AUTH_METHOD=trust
+      - POSTGRES_DB=orderservice
+    ports:
+      - "5434:5432"

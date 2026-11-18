@@ -1,0 +1,36 @@
+{
+  "generator-jhipster": {
+    "applicationIndex": 0,
+    "applicationType": "gateway",
+    "applications": {
+      "orderservice": {
+        "applicationIndex": 2,
+        "serverPort": "8082"
+      },
+      "productservice": {
+        "applicationIndex": 1,
+        "serverPort": "8081"
+      }
+    },
+    "authenticationType": "jwt",
+    "baseName": "gateway",
+    "buildTool": "maven",
+    "cacheProvider": "no",
+    "clientFramework": "react",
+    "creationTimestamp": 1703252914559,
+    "devDatabaseType": "h2Disk",
+    "devServerPort": null,
+    "entities": ["Product", "CustomerOrder", "OrderItem"],
+    "jhipsterVersion": "9.4.0",
+    "jwtSecretKey": "MzFiN2I0MTQ5MGE0ODEzYjFlNGVkYzQ5ZGQzNTU4MmM2MGI4YmFmMDIwN2QwZDIyYmIzMGFjYzQ2MDdkMGRjNTBmYzgxY2E5NjgyNDE0Y2U4N2FmMTY3ZTBmNGNjNTIzZjQwYjIyZDBmNjIzOTg0NTY4Y2QzZjkyM2UxNDdmNjQ=",
+    "languages": ["en"],
+    "lastLiquibaseTimestamp": 1703253094000,
+    "nativeLanguage": "en",
+    "packageName": "com.mycompany.gateway",
+    "prodDatabaseType": "postgresql",
+    "reactive": true,
+    "serverPort": 8080,
+    "serviceDiscoveryType": "eureka",
+    "testFrameworks": []
+  }
+}

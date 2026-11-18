@@ -1,0 +1,95 @@
+// ========================================================
+// JHipster Microservices Architecture Configuration (JDL)
+// ========================================================
+
+application {
+  config {
+    baseName gateway
+    applicationType gateway
+    packageName com.mycompany.gateway
+    serviceDiscoveryType eureka
+    authenticationType jwt
+    prodDatabaseType postgresql
+    devDatabaseType h2Disk
+    cacheProvider no
+    buildTool maven
+    clientFramework react
+    testFrameworks []
+  }
+  entities Product, CustomerOrder, OrderItem
+}
+
+application {
+  config {
+    baseName productservice
+    applicationType microservice
+    packageName com.mycompany.product
+    serviceDiscoveryType eureka
+    authenticationType jwt
+    prodDatabaseType postgresql
+    devDatabaseType h2Disk
+    cacheProvider redis
+    buildTool maven
+    serverPort 8081
+    feignClient true
+    testFrameworks []
+  }
+  entities Product
+}
+
+application {
+  config {
+    baseName orderservice
+    applicationType microservice
+    packageName com.mycompany.order
+    serviceDiscoveryType eureka
+    authenticationType jwt
+    prodDatabaseType postgresql
+    devDatabaseType h2Disk
+    cacheProvider redis
+    buildTool maven
+    serverPort 8082
+    feignClient true
+    testFrameworks []
+  }
+  entities CustomerOrder, OrderItem
+}
+
+// --------------------------------------------------------
+// Entities & Relationships
+// --------------------------------------------------------
+
+entity Product {
+  name String required
+  description String
+  price BigDecimal required min(0)
+  stockQuantity Integer required min(0)
+}
+
+entity CustomerOrder (customer_order) {
+  orderCode String required
+  orderDate Instant required
+  totalAmount BigDecimal required
+  status OrderStatus required
+}
+
+enum OrderStatus {
+  PENDING, CONFIRMED, SHIPPED, CANCELLED
+}
+
+entity OrderItem (order_item) {
+  productId Long required
+  productName String required
+  price BigDecimal required
+  quantity Integer required min(1)
+}
+
+relationship OneToMany {
+  CustomerOrder{items} to OrderItem{order}
+}
+
+dto Product, CustomerOrder, OrderItem with mapstruct
+service Product, CustomerOrder, OrderItem with serviceImpl
+paginate Product, CustomerOrder with pagination
+microservice Product with productservice
+microservice CustomerOrder, OrderItem with orderservice

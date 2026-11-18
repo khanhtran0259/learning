@@ -1,0 +1,24 @@
+# Target & build output
+**/target/
+**/build/
+**/dist/
+**/out/
+
+# Node
+**/node_modules/
+
+# Maven wrapper jar if needed to exclude
+**/.mvn/wrapper/maven-wrapper.jar
+
+# Databases & local logs
+**/*.log
+**/.h2/
+**/h2db/
+
+# OS and IDE files
+.DS_Store
+.idea/
+*.iml
+.vscode/
+*.swp
+*.bak

@@ -1,0 +1,47 @@
+{
+  "annotations": {
+    "changelogDate": "20231222135034"
+  },
+  "applications": ["gateway", "orderservice"],
+  "clientRootFolder": "orderservice",
+  "databaseType": "sql",
+  "dto": "mapstruct",
+  "entityTableName": "customer_order",
+  "fields": [
+    {
+      "fieldName": "orderCode",
+      "fieldType": "String",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "orderDate",
+      "fieldType": "Instant",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "totalAmount",
+      "fieldType": "BigDecimal",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "status",
+      "fieldType": "OrderStatus",
+      "fieldValidateRules": ["required"],
+      "fieldValues": "PENDING,CONFIRMED,SHIPPED,CANCELLED"
+    }
+  ],
+  "microserviceName": "orderservice",
+  "name": "CustomerOrder",
+  "pagination": "pagination",
+  "relationships": [
+    {
+      "otherEntityName": "orderItem",
+      "otherEntityRelationshipName": "order",
+      "relationshipName": "items",
+      "relationshipSide": "left",
+      "relationshipType": "one-to-many"
+    }
+  ],
+  "searchEngine": "no",
+  "service": "serviceImpl"
+}

@@ -1,0 +1,25 @@
+{
+  "generator-jhipster": {
+    "applicationIndex": 2,
+    "applicationType": "microservice",
+    "authenticationType": "jwt",
+    "baseName": "orderservice",
+    "buildTool": "maven",
+    "cacheProvider": "redis",
+    "creationTimestamp": 1703713763171,
+    "devDatabaseType": "h2Disk",
+    "entities": ["CustomerOrder", "OrderItem"],
+    "feignClient": true,
+    "jhipsterVersion": "9.4.0",
+    "jwtSecretKey": "N2JiMzlmNWFhYWM5N2IzODdiZTcxODRkYWQ4NzEyNDljNGQwMGQxNWQ2YmM5MDJiYzQ2NDNhODI0YTA4NTBiMGQ0N2ZmMzA4N2U0MDliMWI1ODA1NDM1OWFmYjA0ZDVmNThiMWNmMGZjNWVhNDM5MTQyZjA4M2Y0OGQxODkzNWM=",
+    "languages": ["en"],
+    "lastLiquibaseTimestamp": 1703713883000,
+    "nativeLanguage": "en",
+    "packageName": "com.mycompany.order",
+    "prodDatabaseType": "postgresql",
+    "serverPort": "8082",
+    "serviceDiscoveryType": "eureka",
+    "skipClient": true,
+    "testFrameworks": []
+  }
+}

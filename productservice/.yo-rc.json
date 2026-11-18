@@ -1,0 +1,25 @@
+{
+  "generator-jhipster": {
+    "applicationIndex": 1,
+    "applicationType": "microservice",
+    "authenticationType": "jwt",
+    "baseName": "productservice",
+    "buildTool": "maven",
+    "cacheProvider": "redis",
+    "creationTimestamp": 1703188366270,
+    "devDatabaseType": "h2Disk",
+    "entities": ["Product"],
+    "feignClient": true,
+    "jhipsterVersion": "9.4.0",
+    "jwtSecretKey": "ZTU1Y2UyNTA5ZDhiNTA5OGUxZWY1NjAzZDY1YzgzMDFjYTMyYzAyOTY0Y2FmOWE1ZDUyMzJiNWYzZmVhYTdmZjdiZGZiY2NjMTU1YTA1Yzc4NmE4OGQ3YmJlZjdjNDI1YzkzZTgwYTllYTI0ZGFiMDM3NGM0NmEwOTU2NmFhYTM=",
+    "languages": ["en"],
+    "lastLiquibaseTimestamp": 1703188426000,
+    "nativeLanguage": "en",
+    "packageName": "com.mycompany.product",
+    "prodDatabaseType": "postgresql",
+    "serverPort": "8081",
+    "serviceDiscoveryType": "eureka",
+    "skipClient": true,
+    "testFrameworks": []
+  }
+}

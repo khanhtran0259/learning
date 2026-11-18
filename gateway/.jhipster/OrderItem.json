@@ -1,0 +1,46 @@
+{
+  "annotations": {
+    "changelogDate": "20231222135134"
+  },
+  "applications": ["gateway", "orderservice"],
+  "clientRootFolder": "orderservice",
+  "databaseType": "sql",
+  "dto": "mapstruct",
+  "entityTableName": "order_item",
+  "fields": [
+    {
+      "fieldName": "productId",
+      "fieldType": "Long",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "productName",
+      "fieldType": "String",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "price",
+      "fieldType": "BigDecimal",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "quantity",
+      "fieldType": "Integer",
+      "fieldValidateRules": ["required", "min"],
+      "fieldValidateRulesMin": "1"
+    }
+  ],
+  "microserviceName": "orderservice",
+  "name": "OrderItem",
+  "relationships": [
+    {
+      "otherEntityName": "customerOrder",
+      "otherEntityRelationshipName": "items",
+      "relationshipName": "order",
+      "relationshipSide": "right",
+      "relationshipType": "many-to-one"
+    }
+  ],
+  "searchEngine": "no",
+  "service": "serviceImpl"
+}
