@@ -33,6 +33,7 @@
         <maven.compiler.target>${java.version}</maven.compiler.target>
         <start-class>com.mycompany.gateway.GatewayApp</start-class>
         <argLine>-Xmx1G</argLine>
+        <skipTests>false</skipTests>
         <m2e.apt.activation>jdt_apt</m2e.apt.activation>
         <run.addResources>false</run.addResources>
         <spring-boot.version>${project.parent.version}</spring-boot.version>
@@ -1074,6 +1075,7 @@
                                 <configuration>
                                     <arguments>run webapp:test</arguments>
                                     <npmInheritsProxyConfigFromMaven>false</npmInheritsProxyConfigFromMaven>
+                                    <skip>${skipTests}</skip>
                                 </configuration>
                             </execution>
                             <execution>

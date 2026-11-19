@@ -5,8 +5,6 @@ import react from '@vitejs/plugin-react';
 import { defineConfig, normalizePath } from 'vite';
 import { viteStaticCopy } from 'vite-plugin-static-copy';
 
-const { getAbsoluteFSPath } = await import('swagger-ui-dist');
-const swaggerUiPath = getAbsoluteFSPath();
 const webappDir = fileURLToPath(new URL('./src/main/webapp/', import.meta.url));
 
 const development = process.env.NODE_ENV !== 'production';
@@ -17,17 +15,8 @@ const config = defineConfig({
     viteStaticCopy({
       targets: [
         {
-          src: [
-            `${normalizePath(swaggerUiPath)}/*.{js,css,html,png}`,
-            `!${normalizePath(swaggerUiPath)}/**/index.html`,
-            normalizePath(fileURLToPath(new URL('./dist/axios.min.js', import.meta.resolve('axios/package.json')))),
-            normalizePath(fileURLToPath(new URL('./src/main/webapp/swagger-ui/index.html', import.meta.url))),
-          ],
-          dest: 'swagger-ui',
-          rename: (name, ext, srcPath) => {
-            const rel = path.relative(webappDir, path.dirname(srcPath)).replace(/^(\.\.\/)+/, '');
-            return `${'../'.repeat(rel === '.' ? 0 : rel.split('/').length)}${name}.${ext}`;
-          },
+          src: 'swagger-ui/*',
+          dest: '',
         },
       ],
     }),
