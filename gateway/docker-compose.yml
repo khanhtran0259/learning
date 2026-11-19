@@ -5,9 +5,10 @@ services:
     image: gateway
     container_name: gateway-app
     environment:
-      - _JAVA_OPTIONS=-Xmx384m -Xms128m -XX:TieredStopAtLevel=1
+      - _JAVA_OPTIONS=-Xmx384m -Xms128m -XX:TieredStopAtLevel=1 -Deureka.client.service-url.defaultZone=http://admin:admin@jhipster-registry:8761/eureka/
       - SPRING_PROFILES_ACTIVE=prod,api-docs
-      - EUREKA_CLIENT_SERVICE_URL_DEFAULTZONE=http://admin:admin@jhipster-registry:8761/eureka
+      - EUREKA_CLIENT_SERVICE_URL_DEFAULTZONE=http://admin:admin@jhipster-registry:8761/eureka/
+      - EUREKA_CLIENT_SERVICEURL_DEFAULTZONE=http://admin:admin@jhipster-registry:8761/eureka/
       - SPRING_CLOUD_CONFIG_URI=http://admin:admin@jhipster-registry:8761/config
       - SPRING_R2DBC_URL=r2dbc:postgresql://gateway-postgresql:5432/gateway
       - SPRING_R2DBC_USERNAME=gateway

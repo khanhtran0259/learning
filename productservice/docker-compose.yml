@@ -5,9 +5,10 @@ services:
     image: productservice
     container_name: productservice-app
     environment:
-      - _JAVA_OPTIONS=-Xmx384m -Xms128m -XX:TieredStopAtLevel=1
+      - _JAVA_OPTIONS=-Xmx384m -Xms128m -XX:TieredStopAtLevel=1 -Deureka.client.service-url.defaultZone=http://admin:admin@jhipster-registry:8761/eureka/
       - SPRING_PROFILES_ACTIVE=prod,api-docs
-      - EUREKA_CLIENT_SERVICE_URL_DEFAULTZONE=http://admin:admin@jhipster-registry:8761/eureka
+      - EUREKA_CLIENT_SERVICE_URL_DEFAULTZONE=http://admin:admin@jhipster-registry:8761/eureka/
+      - EUREKA_CLIENT_SERVICEURL_DEFAULTZONE=http://admin:admin@jhipster-registry:8761/eureka/
       - SPRING_CLOUD_CONFIG_URI=http://admin:admin@jhipster-registry:8761/config
       - SPRING_DATASOURCE_URL=jdbc:postgresql://productservice-postgresql:5432/productservice
       - SPRING_DATASOURCE_USERNAME=productservice
