@@ -1,0 +1,68 @@
+name: productservice-stack
+
+services:
+  productservice-app:
+    image: productservice
+    container_name: productservice-app
+    environment:
+      - _JAVA_OPTIONS=-Xmx384m -Xms128m -XX:TieredStopAtLevel=1
+      - SPRING_PROFILES_ACTIVE=prod,api-docs
+      - EUREKA_CLIENT_SERVICE_URL_DEFAULTZONE=http://admin:admin@jhipster-registry:8761/eureka
+      - SPRING_CLOUD_CONFIG_URI=http://admin:admin@jhipster-registry:8761/config
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://productservice-postgresql:5432/productservice
+      - SPRING_DATASOURCE_USERNAME=productservice
+      - SPRING_DATASOURCE_PASSWORD=
+      - SPRING_LIQUIBASE_URL=jdbc:postgresql://productservice-postgresql:5432/productservice
+      - JHIPSTER_CACHE_REDIS_SERVER=redis://productservice-redis:6379
+      - JHIPSTER_CACHE_REDIS_CLUSTER=false
+      - JHIPSTER_SECURITY_AUTHENTICATION_JWT_BASE64_SECRET=MzFiN2I0MTQ5MGE0ODEzYjFlNGVkYzQ5ZGQzNTU4MmM2MGI4YmFmMDIwN2QwZDIyYmIzMGFjYzQ2MDdkMGRjNTBmYzgxY2E5NjgyNDE0Y2U4N2FmMTY3ZTBmNGNjNTIzZjQwYjIyZDBmNjIzOTg0NTY4Y2QzZjkyM2UxNDdmNjQ=
+    ports:
+      - "8081:8081"
+    depends_on:
+      productservice-postgresql:
+        condition: service_healthy
+    networks:
+      - microservices-network
+    deploy:
+      resources:
+        limits:
+          memory: 512M
+
+  productservice-redis:
+    image: redis:7.2-alpine
+    container_name: productservice-redis
+    ports:
+      - "6379:6379"
+    networks:
+      - microservices-network
+    deploy:
+      resources:
+        limits:
+          memory: 128M
+
+  productservice-postgresql:
+    image: postgres:17.5
+    container_name: productservice-postgresql
+    environment:
+      - POSTGRES_USER=productservice
+      - POSTGRES_PASSWORD=
+      - POSTGRES_HOST_AUTH_METHOD=trust
+      - POSTGRES_DB=productservice
+    ports:
+      - "5433:5432"
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U productservice"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+    networks:
+      - microservices-network
+    deploy:
+      resources:
+        limits:
+          memory: 256M
+
+networks:
+  microservices-network:
+    name: microservices-network
+    external: true
